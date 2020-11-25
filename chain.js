@@ -1,12 +1,12 @@
 class Chain{
-    constructor(b1,b2){
-        this.a = b1;
-        this.b = b2;
+    constructor(bodyA,pointb){
+        this.a = bodyA;
+        this.b = pointb;
         var options ={
-            bodyA:b1,
-            bodyB:b2,
+            bodyA:bodyA,
+            pointB:pointb,
             stiffness:0.004,
-            length:26,
+            length:10,
         }
         this.chain = Constraint.create(options);
         World.add(world,this.chain)
@@ -14,12 +14,19 @@ class Chain{
         
         
     }
+    fly(){
+        this.chain.bodyA = null;
+        
+    }
     display(){
         push();
         strokeWeight(4);
-        stroke(255);
-        line(this.a.position.x,this.a.position.y,this.b.position.x,this.b.position.y);
+        stroke(0);
+        if(this.chain.bodyA){
+            line(this.chain.bodyA.position.x,this.chain.bodyA.position.y,this.b.x,this.b.y);
+        }
         pop();
-        
     }
+    
+
 }
